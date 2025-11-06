@@ -1,0 +1,214 @@
+ ## What is Data?
+
+ -   Data is a collection of raw , unprocessed, facts which have no meaning.
+      ex= any text, number ,etc.
+
+
+## What is Database?
+
+-  The organised collection of structured data
+-  collection of _related data_.
+['related data means all the structured data related to particul thing']
+- ex= info releted to student [ - Name,
+                                - Roll no,
+                                - Address,
+                                - Age,
+                                - Gender
+                              ]
+
+## Meta data - [ meta data is like _data about data_
+                ex-> you clicked a picture that picture is your data
+                  -> and the info about the picture like time,date 
+                     when you clicked this is you meta data ]
+
+ 
+ ## What is DBMS?
+
+ - DBMS stand for _Database Management System_.
+ - DBMS is a _Software_ used to manage database file.
+ - it helps to manage ,store and retrive data effeciently and in structured format.
+ ## operations to handle data
+ - Create
+ - Read
+ - Update
+ - Delete
+
+ 📚 
+ ## Types of DataBase
+
+ - there are 5 types of database of which two are popular and commonly used
+  (relational Database and noSql Database)
+
+ -  | Type               | Description                             | Common Use Cases              |
+    |--------------------|-----------------------------------------|-------------------------------|
+    | Relational (SQL)   | Structured tables with predefined       |Banking,Business apps,inventory|
+    |                    | scheema and relationship                |                               |
+                         
+    | NoSQL              | Flexible schema,optimized for scalablit | Real-time apps, big data      |
+    |                    |  and varied data formats                |                               |
+
+    | Hierarchical       | Tree-like parent-child relationships    | Legacy systems, file systems  |
+
+    | Network            | Graph-like multiple relationships       | Telecom, early DBMS models    |
+    
+    | Time-Series        | Optimized for timestamped data          | IoT, monitoring, analytics    |
+
+
+
+
+ ## SQL database(relational)
+
+ -  Data is stored in table format(rows and Columns)
+ - Each table has fixed Scheema( defiend columns and data types).
+ - Uses primary keys to uniquely identify rows and foreign keys to establish relationships between  tables.
+ - Support ACID properties for reliable transactions.
+
+ # example
+ - MySQL
+ - PostgreSQL
+ - Oracle
+ - Microsoft SQL Server
+
+ # Use Cases:
+- When data is highly structured and consistent.
+- Applications needing complex queries and joins.
+- Systems requiring strong consistency and transactional integrity (e.g., banking, ERP).
+
+🔐 ACID Properties Explained
+>Atomicity  |A transaction is all or nothing. If any part fails, the entire transaction is rolled back. 
+
+>Consistency |  Ensures the database moves from one valid state to another. All rules (constraints, triggers) must be preserved.
+
+>Isolation |  Transactions are executed independently. Intermediate states are hidden from other transactions.
+
+>Durability |  Once a transaction is committed, its changes are permanent—even in case of system crashes.
+
+
+🧠 Why ACID Matters
+- Atomicity prevents partial updates that could corrupt data.
+- Consistency ensures business rules are always enforced.
+- Isolation avoids conflicts in concurrent transactions.
+- Durability guarantees reliability after commit.
+These properties are foundational in relational databases like MySQL, PostgreSQL, and Oracle.
+Let me know if you want a diagram or markdown version for your notes repo.
+
+
+# NoSQL DBMS
+
+- They are designed to handle large-scale data and provide high performance for scenarios where relational models might be restrictive.
+
+- They store data in various non-relational formats, such as key-value pairs, documents, graphs or columns.
+
+- these flexible data models helps fast scaling and good for unstructured or semistructure data
+
+# Use Case	
+- Ideal for big data, real-time web apps, and data lakes.
+
+
+| Feature        | SQL                        | NoSQL                                             |
+|----------------|----------------------------|---------------------------------------------------|
+| Data structure |table whit rows and columns |document based ,key-value,column-family,graph-based|
+
+| Scheema        |Fixed Scheema predefinded   |flexible scheema(dynamic and adaptable)            | 
+                 |structure
+|Scalability     | Vertically scalable        |Horizontally scalable(adding more server)          |
+                 | (upgrading hardware)       |                                                   |
+
+|Data Integrity	 | ACID -complaint(strong     |BASE-compliant (more available, less consistent)   |
+                 |           consistency)     |
+
+|Performance     |Efficient for complex queries| Better for large-scale data and fast read/write
+                 |  and transactions          |  operations
+
+
+# keys in Database
+1. Primary Key
+- a primary key uniquely identify each record in a table.
+- it cannot be null and must have a unique key for every row.
+- Each table can have only one primary key, which can be a single column or a combination of    columns.
+
+# ex: CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT
+    );
+
+2. Foreign key
+
+- foreing key is which create the link between two tables
+- It refers to the primary key in another table.
+- Used to maintain referential integrity between related data.
+
+## ex :CREATE TABLE Enrollments (
+  enrollment_id INT PRIMARY KEY,
+  student_id INT,
+  course_id INT,
+  FOREIGN KEY (student_id) REFERENCES Students(student_id)
+);
+
+## 6. Relationships
+
+## 🟩 One-to-One
+- Definition: Each record in Table A is linked to exactly one record in Table B, and vice versa.
+# Example:
+- Users table and UserProfiles table.
+- Each user has one profile, and each profile belongs to one user.
+# CREATE TABLE Users (
+  user_id INT PRIMARY KEY,
+  username VARCHAR(100)
+);
+
+# CREATE TABLE UserProfiles (
+  profile_id INT PRIMARY KEY,
+  user_id INT UNIQUE,
+  bio TEXT,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+
+
+## 🟨 One-to-Many
+- Definition: One record in Table A can be linked to many records in Table B.
+#  Example:
+- Authors table and Books table.
+- One author can write many books, but each book has one author.
+# CREATE TABLE Authors (
+  author_id INT PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+# CREATE TABLE Books (
+  book_id INT PRIMARY KEY,
+  title VARCHAR(100),
+  author_id INT,
+  FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+);
+
+
+
+## 🟥 Many-to-Many
+- Definition: Records in Table A can be linked to multiple records in Table B, and vice versa.
+#  Example:
+- Students table and Courses table.
+- A student can enroll in many courses, and each course can have many students.
+- Requires a junction table (e.g., Enrollments).
+# CREATE TABLE Students (
+  student_id INT PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+# CREATE TABLE Courses (
+  course_id INT PRIMARY KEY,
+  title VARCHAR(100)
+);
+
+# CREATE TABLE Enrollments (
+  student_id INT,
+  course_id INT,
+  PRIMARY KEY (student_id, course_id),
+  FOREIGN KEY (student_id) REFERENCES Students(student_id),
+  FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
+
+
