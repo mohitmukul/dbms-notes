@@ -1,0 +1,144 @@
+# SQL Practice - Day 10
+
+Date: November 6, 2024
+
+## Queries Practiced
+
+### 1. SELECT with WHERE
+```sql
+SELECT * FROM users WHERE age > 25;
+```
+**Purpose:** Filter rows based on condition
+**Result:** Returns all users older than 25
+
+---
+
+### 2. SELECT with ORDER BY
+```sql
+SELECT name, age FROM users ORDER BY age DESC;
+```
+**Purpose:** Sort results
+**Result:** Users sorted by age (highest first)
+
+---
+
+### 3. LIMIT
+```sql
+SELECT * FROM users LIMIT 5;
+```
+**Purpose:** Get first N records
+**Result:** First 5 users
+
+---
+
+### 4. COUNT
+```sql
+SELECT COUNT(*) FROM users;
+```
+**Purpose:** Count total rows
+**Result:** Total number of users
+
+---
+
+### 5. WHERE with AND
+```sql
+SELECT * FROM users WHERE age > 20 AND city = 'Delhi';
+```
+**Purpose:** Multiple conditions
+**Result:** Users over 20 in Delhi
+
+---
+
+### 6. WHERE with OR
+```sql
+SELECT * FROM users WHERE city = 'Mumbai' OR city = 'Delhi';
+```
+**Purpose:** Either condition matches
+**Result:** Users from Mumbai or Delhi
+
+---
+
+### 7. LIKE (Pattern Matching)
+```sql
+SELECT * FROM users WHERE name LIKE 'A%';
+```
+**Purpose:** Pattern search
+**Result:** Names starting with 'A'
+
+---
+
+### 8. IN Clause
+```sql
+SELECT * FROM users WHERE city IN ('Mumbai', 'Delhi', 'Bangalore');
+```
+**Purpose:** Match any value in list
+**Result:** Users from these 3 cities
+
+---
+
+### 9. BETWEEN
+```sql
+SELECT * FROM users WHERE age BETWEEN 20 AND 30;
+```
+**Purpose:** Range filter
+**Result:** Users aged 20-30
+
+---
+
+### 10. GROUP BY
+```sql
+SELECT city, COUNT(*) FROM users GROUP BY city;
+```
+**Purpose:** Group and count
+**Result:** Number of users per city
+
+---
+
+### 11. HAVING
+```sql
+SELECT city, COUNT(*) FROM users 
+GROUP BY city 
+HAVING COUNT(*) > 5;
+```
+**Purpose:** Filter grouped results
+**Result:** Cities with more than 5 users
+
+---
+
+### 12. MAX
+```sql
+SELECT MAX(age) FROM users;
+```
+**Purpose:** Find maximum value
+**Result:** Oldest user's age
+
+---
+
+### 13. AVG
+```sql
+SELECT AVG(age) FROM users;
+```
+**Purpose:** Calculate average
+**Result:** Average age of users
+
+---
+
+### 14. INNER JOIN
+```sql
+SELECT users.name, orders.product
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;
+```
+**Purpose:** Combine tables
+**Result:** Users with their orders
+
+---
+
+### 15. LEFT JOIN
+```sql
+SELECT users.name, orders.product
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id;
+```
+**Purpose:** Include all from left table
+**Result:** All users, with orders if they exist
