@@ -1,0 +1,67 @@
+# Database Normalization - Complete Guide
+
+## Why Normalize?
+
+- Normalazation is a method used to breaking down of large complex tabels into smaller related tables and define relationship between them.
+. it redeuse redendency(duplicate) of data in table and also remove inconsistency problem and unwanted risk.
+
+- **advantages**
+- maintain data integrity(primary key ,unique key).
+- reduce the large complex structure of table.
+- avoid null value.
+- structuring of data so that model is flexible and easy to use.
+
+## types of Normalization
+- 1NF
+- 2NF
+- 3NF
+- BCNF 
+- 4NF
+- 5NF
+
+## 1NF
+-  Data should be stored in a table with rows and column and every coulumn should contain indiviual values.
+
+**example**
+
+StudentID | Name   | Courses
+__________|________|_________________
+1         | Alice  | Math, Physics
+2         | Bob    | Chemistry
+
+**1NF conversion**
+
+--every column should have uniqe value
+
+StudentID | Name   | Course
+__________|________|__________
+1         | Alice  | Math
+1         | Alice  | Physics
+2         | Bob    | Chemistry
+
+ 2NF (Second Normal Form)
+1NF Table (with partial dependency):
+StudentID | Course   | Instructor
+__________|__________|____________
+1         | Math     | Prof. A
+1         | Physics  | Prof. B
+
+
+## 2NF Tables (table must be in 1NF -(means-column should have unique value)):
+
+- all nun key attribute should be fully dependent on the primary key (no partial dependencies)-(non-prime attribute depends on full primary key).
+
+StudentID | Course
+__________|__________
+1         | Math
+1         | Physics
+
+
+Course   | Instructor
+_________|____________
+Math     | Prof. A
+Physics  | Prof. B
+
+
+
+
