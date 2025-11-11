@@ -42,7 +42,7 @@
  -  | Type               | Description                             | Common Use Cases              |
     |--------------------|-----------------------------------------|-------------------------------|
     | Relational (SQL)   | Structured tables with predefined       |Banking,Business apps,inventory|
-    |                    | scheema and relationship                |                               |
+    |                    | scheema and relationship                |                               |  
                          
     | NoSQL              | Flexible schema,optimized for scalablit | Real-time apps, big data      |
     |                    |  and varied data formats                |                               |
@@ -78,10 +78,15 @@
 >Atomicity  |A transaction is all or nothing. If any part fails, the entire transaction is rolled back. 
 
 >Consistency |  Ensures the database moves from one valid state to another. All rules (constraints, triggers) must be preserved.
+>ex= account balance never go negative due to bug
 
 >Isolation |  Transactions are executed independently. Intermediate states are hidden from other transactions.
+>ex= Two users transferring money at once won’t clash.
 
 >Durability |  Once a transaction is committed, its changes are permanent—even in case of system crashes.
+>ex= Even if the server crashes, your transfer stays saved.
+
+🧠 Used in: Relational databases like MySQL, PostgreSQL, Oracle — where correctness is critical.
 
 
 🧠 Why ACID Matters
@@ -91,6 +96,27 @@
 - Durability guarantees reliability after commit.
 These properties are foundational in relational databases like MySQL, PostgreSQL, and Oracle.
 Let me know if you want a diagram or markdown version for your notes repo.
+
+
+
+🌊 BASE: High Availability for Scalable Systems
+BASE stands for:
+>Basically Available | System is always responsive, even if some data is missing.|
+>ex= You can still scroll Instagram even if likes are delayed. 
+
+>Soft State |  Data may change over time, even without input.|  
+>ex= A post might show 100 likes now, 102 later.
+
+>Eventually Consistent | Data becomes correct eventually, not instantly.
+>ex= Comments sync across devices after a few seconds.
+
+
+🧠 Used in: NoSQL databases like Cassandra, MongoDB, DynamoDB — where speed and scale matter more than instant accuracy.
+
+⚖️ Summary: When to Use What
+- ACID = Precision first → Banking, e-commerce orders, inventory
+- BASE = Speed and scale → Social media, analytics, caching systems
+Let me know if you want a visual ASCII table or a cheat sheet for interviews!
 
 
 # NoSQL DBMS
@@ -198,7 +224,7 @@ Let me know if you want a diagram or markdown version for your notes repo.
 );
 
 # CREATE TABLE Courses (
-  course_id INT PRIMARY KEY,
+  course_id INT PRIMARY KEY, 
   title VARCHAR(100)
 );
 

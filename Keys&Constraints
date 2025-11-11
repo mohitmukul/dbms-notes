@@ -1,0 +1,164 @@
+## what is key?
+
+> key is a data item in RDBMS which uniquely identify the records of data
+
+## Types of Keys-----
+
+**Primary Key**--
+> primary key is a key feild  which uniquly identify each record of table
+
+# example ----------   Student Table
+
+Rollno| name  | address  | phoneno.
+1     |mohit  | hfhfhfhfh| 3993939399
+2     |radha  | hfhfhfhfh| 3993939399
+
+> here rollno. is a primary key because it is having a unique value (no duplicate)
+- Query - Sql> create table student (Rollno number primary key,address varchar(20),phoneno number)
+- we cannot insert duplicate value in primary key if we do it will through an error.
+
+## query -CREATE TABLE Students (  RollNumber INT PRIMARY KEY,  Name VARCHAR(100),  Email VARCHAR(100));
+ - RollNumber uniquely identifies each student
+
+
+
+**Candidate key**-----
+>A candidate key is any column or combination of columns in a table that can uniquely identify each row.
+- It must be unique and non-null for every record.
+- A table can have multiple candidate keys.
+- One of them is chosen as the primary key.
+
+Table: Students
++------------+------------+-----------+
+| RollNumber | Email      | Phone     |
++------------+------------+-----------+
+| 101        | a@x.com    | 9999999999|
+| 102        | b@x.com    | 8888888888|
++------------+------------+-----------+
+
+- RollNumber, Email, and Phone can all uniquely identify a student → all are candidate keys.
+- If we choose RollNumber as the primary key, the others remain candidate keys.
+
+## query - CREATE TABLE Students (  RollNumber INT PRIMARY KEY,  Email VARCHAR(100) UNIQUE,  Phone VARCHAR(15) NIQUE
+);
+- Email and Phone are candidate keys (unique + non-null).
+- Only one is chosen as the primary key; others are alternate keys.
+
+
+**Alternate key**
+>An alternate key is any candidate key that was not chosen as the primary key.
+- All candidate keys are capable of uniquely identifying rows.
+- The one you choose becomes the primary key.
+- The rest become alternate keys.
+
+## Example
+
+Table: Employees
++------------+------------+------------+
+| EmpID      | Email      | SSN        |
++------------+------------+------------+
+| 101        | a@x.com    | 123-45-6789|
+| 102        | b@x.com    | 987-65-4321|
++------------+------------+------------+
+
+- EmpID, Email, and SSN are all candidate keys.
+- If EmpID is chosen as the primary key, then:
+- Email and SSN become alternate keys.
+
+## query- CREATE TABLE Students (  RollNumber INT PRIMARY KEY,  Email VARCHAR(100) UNIQUE,-- alternate key  Phone VARCHAR(15) UNIQUE    -- alternate key
+);
+
+
+**Composite key**---  — When One Column Isn’t Enough
+A composite key is a combination of two or more columns that together uniquely identify each row.
+- Individually, these columns can’t guarantee uniqueness.
+- But together, they form a unique identifier.
+
+🧠 Example
+Table: Course_Registrations
++------------+------------+--------+
+| StudentID  | CourseID   | Grade  |
++------------+------------+--------+
+| 101        | CS101      | A      |
+| 101        | MA101      | B+     |
+| 102        | CS101      | A-     |
++------------+------------+--------+
+
+
+- StudentID alone → ❌ not unique (student takes multiple courses)
+- CourseID alone → ❌ not unique (course has many students)
+- (StudentID, CourseID) together → ✅ unique → composite key
+
+## query- CREATE TABLE Course_Registrations ( StudentID INT, CourseID VARCHAR(10), Grade VARCHAR(2), PRIMARY KEY (StudentID, CourseID)
+);
+
+
+**Forign Key**— Linking Tables Together
+A foreign key is a column in one table that refers to the primary key of another table.
+- It creates a relationship between two tables.
+- Ensures referential integrity — meaning the value must exist in the referenced table.
+
+🧠 Example
+Table: Departments
++------------+-------------+
+| DeptID     | DeptName    |
++------------+-------------+
+| 1          | HR          |
+| 2          | Engineering |
++------------+-------------+
+
+Table: Employees
++------------+----------+--------+
+| EmpID      | Name     | DeptID |
++------------+----------+--------+
+| 101        | Alice    | 1      |
+| 102        | Bob      | 2      |
++------------+----------+--------+
+
+
+- DeptID in Departments is the primary key.
+- DeptID in Employees is a foreign key → it must match a valid DeptID in Departments.
+
+## query -CREATE TABLE Departments (DeptID INT PRIMARY KEY, DeptName VARCHAR(100));
+
+## CREATE TABLE Employees ( EmpID INT PRIMARY KEY,  Name VARCHAR(100),  DeptID INT,  FOREIGN KEY (DeptID) REFERENCES Departments(DeptID)
+);
+
+
+**Unique key**- Unique Key — Enforcing Uniqueness Without Being Primary
+
+A unique key ensures that values in a column (or group of columns) are never duplicated across rows.
+- Like a primary key, it enforces uniqueness.
+- But unlike a primary key:
+- You can have multiple unique keys in a table.
+- It can contain nulls (unless explicitly restricted).
+
+🧠 Example
+Table: Users
++------------+------------+------------+
+| UserID     | Email      | Phone      |
++------------+------------+------------+
+| 1          | a@x.com    | 9999999999 |
+| 2          | b@x.com    | 8888888888 |
++------------+------------+------------+
+
+- - UserID → Primary key
+- Email and Phone → Unique keys (no duplicates allowed)
+
+## query - CREATE TABLE Users (
+  UserID INT PRIMARY KEY,
+  Email VARCHAR(100) UNIQUE,
+  Phone VARCHAR(15) UNIQUE
+);
+
+You can also define a composite unique key:
+
+## CREATE TABLE Orders (
+  OrderID INT PRIMARY KEY,
+  ProductID INT,
+  CustomerID INT,
+  UNIQUE (ProductID, CustomerID)
+);
+
+
+- This ensures that the same customer doesn’t order
