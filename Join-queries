@@ -1,0 +1,101 @@
+## COMPARISION TABLE FOR ALL QUERIES
++----+--------+---------+
+| id | name   | city_id |
++----+--------+---------+
+| 1  | Mohit  | 101     |
+| 2  | Aditi  | 102     |
+| 3  | Rahul  | NULL    |
+| 4  | Neha   | 105     |
++----+--------+---------+
+
+Table: cities
++-----+----------+
+| id  | name     |
++-----+----------+
+| 101 | Delhi    |
+| 102 | Mumbai   |
+| 103 | Chennai  |
++-----+----------+
+----------------------------------------------------
+
+
+## Inner Join-
+
+> Return records that have matching values in both tables 
+
+> Table: users
++----+--------+---------+
+| id | name   | city_id |
++----+--------+---------+
+| 1  | Mohit  | 101     |
+| 2  | Aditi  | 102     |
+| 3  | Rahul  | NULL    |
+| 4  | Neha   | 105     |
++----+--------+---------+
+
+Table: cities
++-----+----------+
+| id  | name     |
++-----+----------+
+| 101 | Delhi    |
+| 102 | Mumbai   |
+| 103 | Chennai  |
++-----+----------+
+
+## query--
+
+SQL> select users.name,cities.name from users inner join cities on users.city_id=cities.id--
+
+**so this query will find the matching joins and return data**
+| name  | name   |
+|-------|--------|
+| Mohit | Delhi  |
+| Aditi | Mumbai |  (103 id is not included because its is not present in users and 105 is not included because it is not present in the cities)
+
+
+## LEFT JOIN
+
+> returns all records from the left table, and the matched records from the right table.
+
+## query--
+
+SQL> SELECT users.name,cities.name from users LEFT JOIN cities ON users city_id= cities.id
+
+| name  | name   |
+|-------|--------|
+| Mohit | Delhi  |
+| Aditi | Mumbai |
+| Rahul | NULL   |
+| Neha  | NULL   |
+
+
+## RIGHT JOIN
+
+> returns all records from the right table, and the matched records from the left table
+
+## query--
+
+SQL> SELECT users.name, cities.name from users RIGHT JOIN cities ON user.city_id=cities.id
+
+| name  | name     |
+|-------|----------|
+| Mohit | Delhi    |
+| Aditi | Mumbai   |
+| NULL  | Chennai  |
+
+
+##  FULL JOIN----
+
+> return all the data from both the table if it is matched or unmatched
+
+## query---
+
+SQL> SELECT users.name,cities.name from users FULL JOIN cities ON users.city_ID = cities.id.
+
+| name  | name     |
+|-------|----------|
+| Mohit | Delhi    |
+| Aditi | Mumbai   |
+| Rahul | NULL     |
+| Neha  | NULL     |
+| NULL  | Chennai  |

@@ -31,7 +31,7 @@ __________|________|_________________
 
 **1NF conversion**
 
---every column should have uniqe value
+--every column should have individual/uniqe value
 
 StudentID | Name   | Course
 __________|________|__________
@@ -39,29 +39,77 @@ __________|________|__________
 1         | Alice  | Physics
 2         | Bob    | Chemistry
 
- 2NF (Second Normal Form)
+
+
+ **2NF (Second Normal Form)**
+
 1NF Table (with partial dependency):
-StudentID | Course   | Instructor
-__________|__________|____________
-1         | Math     | Prof. A
-1         | Physics  | Prof. B
+
+((here instruction only depend on the Course(composite key)))
+
+StudentID | Name |Course   | Instructor
+__________|______|_________|____________
+1         |ankint|Math     | Prof. A
+1         |amohti| Physics  | Prof. B
 
 
 ## 2NF Tables (table must be in 1NF -(means-column should have unique value)):
 
 - all nun key attribute should be fully dependent on the primary key (no partial dependencies)-(non-prime attribute depends on full primary key).
 
+## 2nf table (here we created 2 table )
+(one with primary key attribute containing unique value )
+
+StudentID | name
+__________|__________
+1         | ankint
+1         | amohit
+
+
+(and one with all the nun key attribut(duplicate value)
+created a column of foreign key(with refrence of primary key) to create realtion with table one.)
+
+StudentID|Course   | Instructor
+_________|_________|____________
+1        |Math     | Prof. A
+1        |Physics  | Prof. B
+
+
+**3NF (Must be in - 2NF )**
+
+- No transistive dependency( non-key attribut should not depend on other non-key attributes).
+
+Table1:Student
+
+StudentID|Course   | Instructor
+_________|_________|____________
+1        |Math     | Prof. A
+1        |Physics  | Prof. B
+
+
+(- here (Course)is depend on StudentID but which is correct 
+-but
+ - (Instructor) is depend on (Course) which is incorrect - because Course is a non key).
+
+ After 3NF:
+
+Table: Course
 StudentID | Course
 __________|__________
-1         | Math
+1         | Maths
 1         | Physics
 
-
-Course   | Instructor
+Table: instructor
+StudentID| Instructor
 _________|____________
-Math     | Prof. A
-Physics  | Prof. B
+1        | Prof. A
+1        | Prof. B
 
 
+🧠 Interview Q&A
+## Q: Why normalize?
+A: Remove redundancy, prevent anomalies, save space
+## Q: What is denormalization?
+A: Intentionally adding redundancy for performance (e.g., fewer joins)
 
 

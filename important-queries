@@ -1,0 +1,80 @@
+## Basic queries
+
+1- select all
+# SELECT * FROM users
+> fetches all column and rows from the users table
+
+
+
+2- select specific column
+# SELECT name,email FROM users
+> select name and email column from 
+the users table
+
+
+3- select clause
+# SELECT * FROM users WHERE age > 25
+> filter all the user older then 25
+
+3- Order by
+#  SELECT * FROM users WHERE ORDER BY age DESC
+> select all the users by age in descending order
+
+4- limit 
+# SELECT * FROM users LIMIT 10
+> select only 1st 10 users from table
+
+
+
+## AGGREGATE FUNCTIONS
+
+-- 6. Count
+## SELECT COUNT(*) FROM users;
+-- Total number of users
+
+-- 7. Average
+## SELECT AVG(age) FROM users;
+-- Average age of users
+
+-- 8. Max
+## SELECT MAX(age) FROM users;
+-- Oldest user’s age
+
+-- 9. Min
+## SELECT MIN(age) FROM users;
+-- Youngest user’s age
+
+-- 10. Group by
+## SELECT city,COUNT(*) FROM users GROUP BY city
+-- Number of users per city
+
+
+## ADVANCE QUERIES
+
+-- 11. Inner join
+## SELECT users.name, orders.product
+FROM users
+INNER JOIN orders ON users.id = orders.user_id**;
+-- Shows users who have placed orders
+
+-- 12. Left join
+## SELECT users.name, orders.product 
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id;
+-- Shows all users, even if they haven’t ordered
+
+-- 13. Having clause
+## SELECT city,COUNT(*) AS user_count
+ FROM users
+ GROUP BY city
+ HAVING user_count>5
+
+-- Cities with more than 5 users
+
+-- 14. Like operator
+## SELECT * FROM users WHERE name LIKE 'M%';
+-- Users whose names start with 'M'
+
+-- 15. Between
+## SELECT * FROM users WHERE age BETWEEN 20 AND 30;
+-- Users aged between 20 and 30 (inclusive)
